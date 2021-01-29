@@ -1,0 +1,17 @@
+env\chat\Scripts\activate
+
+d:
+cd django/django-chat/django
+
+property
+
+onmessage
+onclose
+onopen
+onerror
+readyState
+
+methods
+
+close()
+send()

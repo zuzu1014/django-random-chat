@@ -1,0 +1,42 @@
+<div id="sidebar">
+
+    <div id="sidebar__list">
+        <div class="sidebar__list__item"></div>
+        <div class="sidebar__list__item"></div>
+        <div class="sidebar__list__item"></div>
+        <div class="sidebar__list__item"></div>
+        <div class="sidebar__list__item"></div>
+        <div class="sidebar__list__item"></div>
+    </div>
+
+</div>
+
+
+<script>
+    /* SHOW SIDEBAR */
+    let sidebar = document.querySelector("#sidebar")
+    document.querySelector("#header__sidebar__menu").addEventListener('click', (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle("show-sidebar")
+        if (sidebar.classList.contains('show-sidebar')) {
+            flex(sidebar)
+            hide(document.querySelector("#header__sidebar__menu"))
+            block(document.querySelector("#header__sidebar__menu__close"))
+            sidebar.classList.remove('hide-sidebar')
+        }
+        else {
+            sidebar.classList.add("hide-sidebar")
+        }
+    });
+    sidebar.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    document.querySelector('body, html').addEventListener('click', (e) => {
+        block(document.querySelector("#header__sidebar__menu"))
+        hide(document.querySelector("#header__sidebar__menu__close"))
+        sidebar.classList.remove('show-sidebar')
+        sidebar.classList.add("hide-sidebar")
+    });
+
+
+</script>

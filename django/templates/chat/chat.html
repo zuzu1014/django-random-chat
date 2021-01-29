@@ -1,0 +1,209 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+
+
+
+<link rel="stylesheet" href="/static/css/chat/chat.css">
+<link rel="stylesheet" href="/static/css/chat/loader.css">
+
+<section id="chat" class="zuzu__container">
+
+    <div id="chat__layer"></div>
+
+
+    <div id="chat__dashboard">
+        <div id="chat__dashboard__user">
+            <img id="chat__dashboard__user__img" src="/static/img/common/avatar_default.png" alt="" srcset="">
+            <div id="chat__dashboard__user__name">{{user.user_id}}</div>
+        </div>
+        <div id="chat__dashboard__rooms">
+            <div id="chat__dashboard__rooms__search">
+                <input id="chat__dashboard__rooms__search__input" type="text">
+                <div id="chat__dashboard__rooms__search__icon"><i class="fas fa-search"></i></div>
+            </div>
+            <div id="chat__dashboard__rooms__option">
+                <div id="chat__dashboard__rooms__option__title">친구 목록</div>
+                <div id="chat__dashboard__rooms__option__plus"><i class="fas fa-plus-square"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat__chat">
+        <div id="chat__chat__front">
+            <div id="chat__chat__front__img">
+                <img id="chat__chat__front__img__style" src="/static/img/common/main.svg" alt="" srcset="">
+            </div>
+
+            <div id="chat__chat__front__start">친구 찾기</div>
+        </div>
+
+        <div id="chat__chat__loading">
+            <div class="ball-rotate">
+                <div></div>
+            </div>
+
+            <div id="chat__chat__loading__msg">친구를 찾고 있습니다.</div>
+        </div>
+
+
+        <div id="chat__chat__matched">
+
+            <div id="chat__chat__matched__settings">
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+            <div id="chat__chat__matched__settings__modal">
+                <div class="chat__chat__matched__settings__modal__item">
+                    <i class="fas fa-door-open"></i> &nbsp;&nbsp;나가기
+                </div>
+                <div class="chat__chat__matched__settings__modal__item">
+                    <i class="fas fa-bullhorn"> </i> &nbsp;&nbsp; 신고하기
+                </div>
+            </div>
+
+
+
+            <div id="chat__chat__matched__body">
+                <div id="chat__chat__matched__body__padding" style="margin: 5px 0;">&nbsp;
+                </div>
+            </div>
+
+
+            <div id="chat__chat__matched__send">
+                <input type="text" id="chat__chat__matched__send__input">
+                <div id="chat__chat__matched__send__btn"><i class="fas fa-paper-plane"></i></div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+<!-- MODAL -->
+<script>
+
+    document.querySelector("#chat__chat__matched__settings").addEventListener("click", (e) => {
+        e.stopPropagation();
+        flex(document.querySelector("#chat__chat__matched__settings__modal"))
+        block(document.querySelector("#chat__layer"))
+    })
+
+    document.querySelector("#chat__chat__matched__settings__modal").addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    document.querySelector('body, html').addEventListener('click', (e) => {
+        hide(document.querySelector("#chat__chat__matched__settings__modal"))
+        hide(document.querySelector("#chat__layer"))
+    });
+
+</script>
+
+
+
+
+<!-- CHAT FRONT -->
+
+<script>
+
+
+    console.log("{{user.id}}")
+
+    document.querySelector("#chat__chat__front__start").addEventListener("click", () => {
+        hide(document.querySelector("#chat__chat__front"))
+        flex(document.querySelector("#chat__chat__loading"))
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+        );
+
+        chatSocket.onopen = (e) => {
+        }
+
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+
+
+            let newMsgHtml = document.createElement('div')
+            newMsgHtml.innerText = data.message
+            document.querySelector('#chat__chat__matched__body').appendChild(newMsgHtml)
+            document.querySelector('#chat__chat__matched__body').appendChild(document.querySelector("#chat__chat__matched__body__padding"))
+            document.getElementById('chat__chat__matched__body').scrollTop = document.getElementById('chat__chat__matched__body').scrollHeight
+
+
+
+            if (data.server_event == "start_chat") {
+                newMsgHtml.setAttribute('class', "msg__notice")
+                hide(document.querySelector("#chat__chat__loading"))
+                block(document.querySelector("#chat__chat__matched"))
+            }
+
+            else if (data.server_event == "end_chat") {
+                newMsgHtml.setAttribute('class', "msg__notice")
+            }
+
+
+            else if (data.server_event == "chat_message") {
+                newMsgHtml.setAttribute('class', "chat__chat__matched__body__msg")
+                if (data.sender_id == "{{user.id}}") {
+                    newMsgHtml.classList.add("msg__sent")
+                }
+                else {
+                    newMsgHtml.classList.add("msg__received")
+                }
+            }
+
+
+        };
+
+
+
+        chatSocket.onclose = function (e) {
+            console.error('on message');
+        };
+
+        document.querySelector('#chat__chat__matched__send__input').focus();
+        document.querySelector('#chat__chat__matched__send__input').onkeyup = function (e) {
+            if (e.keyCode === 13) {
+                document.querySelector('#chat__chat__matched__send__btn').click();
+            }
+        };
+        document.querySelector('#chat__chat__matched__send__btn').onclick = function (e) {
+            const messageInputDom = document.querySelector('#chat__chat__matched__send__input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'client_event': "chat_message",
+                'sender_id': "{{user.id}}",
+                'message': message
+            }));
+            messageInputDom.value = '';
+        };
+
+
+    })
+
+</script>
+
+
+
+<!-- CHAT -->
+<script>
+
+
+
+</script>
+
+
+{% endblock %}
