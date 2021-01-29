@@ -59,13 +59,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #225596;
     width: 100px;
     height: 60%;
     font-weight: 900;
     border-radius: 0.2rem;
-    background-color: #fff;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    box-shadow:  0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     cursor: pointer;
 }
 
@@ -80,9 +80,27 @@
     font-weight: 700;
     border-radius: 0.2rem;
     font-size: 0.75rem;
-    
+    background-color: #225596;
+    box-shadow:  0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     cursor: pointer;
 }
+
+
+#header__user__logout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #225596;
+    width: 100px;
+    height: 60%;
+    font-weight: 900;
+    border-radius: 0.2rem;
+    margin-right: 20px;
+    font-size: 0.8rem;
+    box-shadow:  0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+}
+
 
 #header__user__avatar {
     display: flex;

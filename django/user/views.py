@@ -76,8 +76,5 @@ def check_unique_id(request):
     except KeyError:
         return JsonResponse({'msg': "INVALID_KEYS"}, status=400)
     
-@method_decorator(login_required, name='dispatch')
-class MypageView(View):
-    def get(self,request):
-        return render(request, 'user/mypage.html')
+
         

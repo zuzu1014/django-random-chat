@@ -5,11 +5,12 @@
     </div>
     <div id="header__logo" onclick="window.location.href='/'">BrandName</div>
     <div id="header__user">
-        {% if not user.is_authenticated %}
-        <div id="header__user__login" onclick="window.location.href='/login'">Sign Up</div>
-        <div id="header__user__register" onclick="window.location.href='/register'">Sign In</div>
+        {% if not request.user.is_authenticated %}
+        <div id="header__user__login" onclick="window.location.href='/login'">로그인</div>
+        <div id="header__user__register" onclick="window.location.href='/register'">회원 가입</div>
         {% else %}
-        <a href="/mypage">
+        <div id="header__user__logout" onclick="window.location.href='/logout'">로그아웃</div>
+        <a href="/">
             <div id="header__user__avatar"> <i class="header__user__avatar__icon fas fa-user" data-side="user"></i>
             </div>
         </a>
