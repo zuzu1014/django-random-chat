@@ -3,7 +3,7 @@
         <i class="fas fa-bars" id="header__sidebar__menu"></i>
         <i class="fas fa-times" id="header__sidebar__menu__close"></i>
     </div>
-    <div id="header__logo" onclick="window.location.href='/'">BrandName</div>
+    <div id="header__logo" onclick="window.location.href='/'">Django-Chat</div>
     <div id="header__user">
         {% if not request.user.is_authenticated %}
         <div id="header__user__login" onclick="window.location.href='/login'">로그인</div>

@@ -1,9 +1,19 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-{% if user.is_authenticated %}
+{% if request.user.is_authenticated %}
+
+<div id="index__chat"
+    style="display:flex; width: 600px; height: 600px; margin: 0 auto; background-color: #B7CBE1;justify-content: center; align-items: center; margin-top: 100px; flex-direction: column; border-radius: 0.5rem;">
+    <img src="/static/img/common/main.svg" alt="" srcset="" style="width: 80%; height: 80%;">
+    <div id="index__chat__start"
+        style="width: 60%; height: 50px;display: flex;justify-content: center;align-items: center; color: white; background-color: #2E3233; border-radius: 0.5rem; cursor: pointer;"
+        onclick="window.location.href=`/chat`">
+        채팅방 입장
+    </div>
 
 
+</div>
 
 
 {% endif %}

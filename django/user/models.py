@@ -29,8 +29,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=256, verbose_name="pw")
     email = models.EmailField(max_length=128, verbose_name="email",null=True, blank=True)
 
-    nickname = models.CharField(max_length=30, verbose_name='nickname')
-
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
