@@ -5,8 +5,10 @@
 
 
 # Get Started on local
-    make virtual envrionment
-  
+    make and run virtual envrionment
+    
+    change directory to django
+    
     pip install -r requirements.txt
 
     python manage.py migrate
