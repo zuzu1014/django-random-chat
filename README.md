@@ -1,9 +1,10 @@
 # django-random-chat
     random chat with django-channels
+    
+    using django 2.xx, django-chaneels 2.xx
 
 
-# get started
-
+# Get Started on local
     make virtual envrionment
   
     pip install -r requirements.txt
@@ -15,7 +16,7 @@
     visit 127.0.0.1:8000
   
   
-# Docker
+# Get Started with Docker
 
     docker-compose up --build
 
