@@ -5,7 +5,7 @@
 
 
 # Get Started on local
-    make and run virtual envrionment
+    make and run virtual envionment
     
     change directory to django
     
