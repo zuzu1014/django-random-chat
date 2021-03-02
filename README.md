@@ -10,6 +10,6 @@
 
     docker-compose up --build
 
-    docker-compose run django_asgi python migrate
+    docker-compose run django_asgi python manage.py migrate
 
     visit 127:0.0.1
