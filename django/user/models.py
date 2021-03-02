@@ -3,11 +3,10 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, user_id, password, email, nickname):
+    def create_user(self, user_id, password, email):
         user = self.model(
             user_id = user_id,
             email = email,
-            nickname = nickname,
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -28,6 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_id = models.CharField(max_length=17, verbose_name="id", unique=True)
     password = models.CharField(max_length=256, verbose_name="pw")
     email = models.EmailField(max_length=128, verbose_name="email",null=True, blank=True)
+
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

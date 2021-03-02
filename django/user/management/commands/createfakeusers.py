@@ -7,7 +7,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print("Populating...")
         for i in range(300):
-            User.objects.create_user(user_id="dkanrjsk"+str(i), password="dkanrjsk"+str(i), email="dkanrjsk"+str(i)+"@gmail.com", nickname="USER"+ str(i).zfill(3))
+            User.objects.create_user(user_id="dkanrjsk"+str(i), password="dkanrjsk"+str(i), email="dkanrjsk"+str(i)+"@gmail.com")
         print("Done.")
         
         
