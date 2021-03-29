@@ -12,7 +12,7 @@
 
     docker-compose run django_asgi python manage.py migrate
 
-    visit 127:0.0.1
+    visit 127:0.0.1 
 
 # Enjoy chat
 
